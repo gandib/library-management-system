@@ -21,19 +21,12 @@ model Book {
   totalCopies Int
   availableCopies Int
 
-  book BorrowRecord @relation(fields: [bookId], references: [borrowId])
+  BorrowRecord BorrowRecord?
+
 
   @@map("books")
 }
 
-model Author  {
-  authorId String @id @default(uuid())
-  name String
-  bio String
-  dateOfBirth DateTime
-
-  @@map("authors")
-}
 
 model Member   {
   memberId String @id @default(uuid())
@@ -42,7 +35,8 @@ model Member   {
   phone String
   membershipDate DateTime @default(now())
 
-  member BorrowRecord @relation(fields: [memberId], references: [borrowId])
+  BorrowRecord BorrowRecord?
+
 
   @@map("members")
 }
@@ -51,8 +45,10 @@ model BorrowRecord   {
   borrowId String @id @default(uuid())
   borrowDate DateTime @default(now())
   returnDate DateTime? 
-  bookId Book?
-  memberId Member?
+  bookId String @unique
+  memberId String @unique
+  book Book @relation(fields: [bookId], references: [bookId], onDelete: Cascade)
+  member Member @relation(fields: [memberId], references: [memberId], onDelete: Cascade)
 
   @@map("borrowRecords")
 }
