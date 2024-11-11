@@ -42,6 +42,7 @@ const overdueBorrowList = async () => {
       const borrowDate: unknown = data.borrowDate;
       const borrowDateInMS = Date.parse(borrowDate as string);
 
+      // check overdues
       if (
         86400000 * 14 < Date.now() - borrowDateInMS &&
         data?.returnDate === null
