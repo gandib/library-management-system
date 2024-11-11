@@ -4,7 +4,7 @@ import sendResponse from "../../../shared/sendResponse";
 import { borrowReturnServices } from "./borrow-return.service";
 
 const createBorrow = catchAsync(async (req, res) => {
-  const result = await borrowReturnServices.createBorrow();
+  const result = await borrowReturnServices.createBorrow(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

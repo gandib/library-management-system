@@ -21,7 +21,7 @@ model Book {
   totalCopies Int
   availableCopies Int
 
-  BorrowRecord BorrowRecord?
+  BorrowRecord BorrowRecord[]
 
 
   @@map("books")
@@ -35,7 +35,7 @@ model Member   {
   phone String
   membershipDate DateTime @default(now())
 
-  BorrowRecord BorrowRecord?
+  BorrowRecord BorrowRecord[]
 
 
   @@map("members")
@@ -45,8 +45,8 @@ model BorrowRecord   {
   borrowId String @id @default(uuid())
   borrowDate DateTime @default(now())
   returnDate DateTime? 
-  bookId String @unique
-  memberId String @unique
+  bookId String 
+  memberId String 
   book Book @relation(fields: [bookId], references: [bookId], onDelete: Cascade)
   member Member @relation(fields: [memberId], references: [memberId], onDelete: Cascade)
 
