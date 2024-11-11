@@ -34,6 +34,7 @@ const updateMemberById = async (id: string, payload: Partial<Member>) => {
 };
 
 const deleteMemberById = async (id: string) => {
+  // check member isExist
   await prisma.member.findUniqueOrThrow({
     where: {
       memberId: id,
