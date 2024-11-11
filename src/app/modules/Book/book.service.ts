@@ -40,6 +40,7 @@ const deleteBookById = async (id: string) => {
     },
   });
 
+  // hard delete by transaction
   const result = await prisma.$transaction(async (transactionClient) => {
     await transactionClient.borrowRecord.deleteMany({
       where: {
